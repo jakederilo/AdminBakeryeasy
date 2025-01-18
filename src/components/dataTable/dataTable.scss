@@ -1,0 +1,51 @@
+.dataTable {
+  display: flex;
+  flex-direction: column;
+  height: 90%; // Ensures the table fills the container height
+  min-height: calc(85vh - 80px); // Adjust based on your header/footer height
+  background-color: #f8f9fa; // Optional: Add a background color to blend with your theme
+
+  .dataGrid {
+    flex-grow: 1; // Fills the remaining space
+    background: white;
+    padding: 20px;
+    min-width: 300px; // Adjust for smaller screens if needed
+
+    .MuiDataGrid-toolbarContainer {
+      flex-direction: row-reverse;
+    }
+
+    img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .action {
+      display: flex;
+      gap: 15px;
+
+      button,
+      .edit,
+      .delete {
+        cursor: pointer;
+        transition: transform 0.2s ease;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+
+      img {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+}

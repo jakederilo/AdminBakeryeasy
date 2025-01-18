@@ -1,0 +1,33 @@
+.orders {
+  .info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+
+    /* Style the filter container */
+    .filters {
+      display: flex;
+      gap: 20px;
+      align-items: center; /* Align items vertically */
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column; /* Stack label and select vertically */
+      align-items: flex-start; /* Align labels to the left */
+    }
+
+    label {
+      margin-bottom: 5px; /* Space between label and select */
+    }
+
+    select,
+    input[type="date"] {
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+  }
+}

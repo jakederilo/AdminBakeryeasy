@@ -1,0 +1,51 @@
+@use "../../styles//responsive.scss";
+
+.single {
+  display: flex;
+
+  @include responsive.xl {
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .view {
+    flex: 1;
+
+    hr {
+      width: 90%;
+      height: 0;
+      border: 0.5px solid gray;
+      margin: 20px 0px;
+
+      @include responsive.md {
+        display: none;
+      }
+    }
+
+    .chart {
+      margin-top: 50px;
+      width: 80%;
+      height: 400px;
+
+      @include responsive.md {
+        display: none;
+      }
+    }
+  }
+
+  .activities {
+    ul {
+      li {
+        div {
+          min-width: 480px;
+          padding: 15px;
+          background-color: #f45b6810;
+
+          @include responsive.md {
+            min-width: 250px;
+          }
+        }
+      }
+    }
+  }
+}
