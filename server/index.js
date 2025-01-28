@@ -159,7 +159,7 @@ app.post("/login", async (req, res) => {
 
   // Verify reCAPTCHA token
   try {
-    const secretKey = "6LeQLI4qAAAAAPUcRr1CBFWzqRzFk0mqijAWMZXG";
+    const secretKey = "6LcsfcUqAAAAACjZJdI1URZw3ha9v2j0QaaM4bOw";
     const response = await axios.post(
       `https://www.google.com/recaptcha/api/siteverify`,
       null,
