@@ -85,7 +85,7 @@ const Login: React.FC = () => {
           />
           <div className="recaptcha-container">
             <ReCAPTCHA
-              sitekey="6LeQLI4qAAAAAApAQAdKaG7O2c2hXXtrLseb8jTG"
+              sitekey="6LcsfcUqAAAAAMHnVZ0lo7OmS7QiNdL7uc92tr0f"
               onChange={handleCaptchaChange}
               className="justify-center items-center pb-5 pl-2"
             />
