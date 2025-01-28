@@ -56,7 +56,6 @@ const Transaction = () => {
           Transaction List
         </h1>
       </div>
-      {/* Passing only columns without actionColumn */}
       <DataTable slug="transactions" columns={columns} rows={rows} />
     </div>
   );

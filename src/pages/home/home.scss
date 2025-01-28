@@ -1,47 +1,124 @@
 @import "../../styles/variables.scss";
 @import "../../styles/responsive.scss";
 
-.home {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: minmax(180px, auto);
-  grid-auto-flow: dense;
+.dashboard {
+  padding: 2rem;
+  background-color: $main-bg; // Main background color
+  font-family: Arial, sans-serif;
 
-  @include xl{
-    grid-template-columns: repeat(3, 1fr);
-  }
-  @include lg{
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @include md {
-    grid-template-columns: repeat(1, 1fr);
-  }
-  @include sm {
-    grid-auto-rows: minmax(120px, auto);
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: $main-color; // Main text color
+    text-align: center;
   }
 
-  .box {
-    padding: 20px;
-    border-radius: 10px;
-    border: 2px solid $soft-bg;
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+
+    .kpi-box {
+      background-color: $soft-bg; // Use the soft background color
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: $soft-color; // Soft text color
+      }
+
+      .value {
+        font-size: 2rem;
+        font-weight: bold;
+        color: $main-color; // Main text color
+      }
+
+      .change {
+        font-size: 1rem;
+        color: $soft-color; // Soft text color
+        margin-top: 0.5rem;
+      }
+    }
   }
 
-  .box1 {
-    grid-column: span 1;
-    grid-row: span 3;
+  .chart-grid {
+    display: grid;
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); // Adjusted to fit charts in two columns
+    gap: 2rem;
+
+    .chart-box {
+      background: $soft-bg; // Soft background color for charts
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      h2 {
+        margin-bottom: 1rem;
+        font-size: 1.4rem;
+        color: $main-color; // Main text color
+      }
+
+      .chart-stats {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        font-weight: bold;
+
+        .total-amount {
+          color: purple;
+          font-size: 1rem;
+        }
+
+        .order-count {
+          color: orange;
+          font-size: 1rem;
+        }
+      }
+
+      canvas {
+        width: 100% !important; // Ensures the chart resizes properly
+        max-height: 300px; // Limits the chart height
+      }
+    }
   }
 
-  .box4 {
-    grid-column: span 1;
-    grid-row: span 3;
-  }
-  .box7 {
-    grid-column: span 2;
-    grid-row: span 2;
+  @media (max-width: 1024px) {
+    .kpi-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
 
-    @include md {
-      display: none;
+    .chart-grid {
+      grid-template-columns: 1fr; // Adjusts to one column for smaller screens
+    }
+  }
+
+  @media (max-width: 768px) {
+    .kpi-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .chart-box canvas {
+      max-height: 250px; // Further reduce chart size for small screens
     }
   }
 }

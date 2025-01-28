@@ -6,8 +6,7 @@ import { Button, Snackbar, Alert, Box } from "@mui/material";
 import EditProduct from "../editproduct/editproduct";
 import EditUser from "../edituser/edituser";
 import "./dataTable.scss";
-import { format } from "date-fns"; // Import date-fns
-import Tooltip from "@mui/material/Tooltip";
+import { format } from "date-fns";
 
 interface Props {
   columns: GridColDef[];
@@ -278,6 +277,19 @@ const DataTable = (props: Props) => {
         );
       }
 
+      if (props.slug !== "transactions") {
+        return (
+          <div className="action">
+            <div className="edit" onClick={() => handleEdit(params.row.id)}>
+              <img src="/edit.svg" alt="Edit" />
+            </div>
+            <div className="delete" onClick={() => handleDelete(params.row.id)}>
+              <img src="/delete.svg" alt="Delete" />
+            </div>
+          </div>
+        );
+      }
+
       return (
         <div className="action">
           <div className="edit" onClick={() => handleEdit(params.row.id)}>
@@ -319,7 +331,11 @@ const DataTable = (props: Props) => {
       <DataGrid
         className="dataGrid"
         rows={formattedRows} // Use the formatted rows
-        columns={[...props.columns, actionColumn]}
+        columns={
+          props.slug === "transactions"
+            ? props.columns
+            : [...props.columns, actionColumn]
+        }
         autoHeight
         initialState={{
           pagination: {

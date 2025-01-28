@@ -440,6 +440,42 @@ app.delete("/users/:id", async (req, res) => {
 });
 
 // Get all orders
+app.get("/products", async (req, res) => {
+  try {
+    const item = await Item.find(); // Assuming `Item` is your products collection model
+    res.json({ message: "Success", data: products });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Error fetching products", error: err.message });
+  }
+});
+app.get("/items-by-category", async (req, res) => {
+  try {
+    const itemsByCategory = await Item.aggregate([
+      {
+        $group: {
+          _id: "$category",
+          totalQuantity: { $sum: "$quantity" }, // Sum the quantities of items
+        },
+      },
+      {
+        $project: {
+          category: "$_id",
+          totalQuantity: 1,
+          _id: 0,
+        },
+      },
+    ]);
+
+    res.json(itemsByCategory);
+  } catch (error) {
+    console.error("Error fetching items by category:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// Get all orders
 app.get("/orders/", async (req, res) => {
   try {
     const orders = await Order.find(); // Fetch all items from MongoDB
@@ -561,6 +597,9 @@ app.post("/orders/confirm/:id", async (req, res) => {
   }
 });
 
+//Reports
+
+// Fetch all transactions
 app.get("/transactions", async (req, res) => {
   try {
     const transactions = await Transaction.find(); // Fetch all transactions
@@ -571,6 +610,90 @@ app.get("/transactions", async (req, res) => {
   } catch (err) {
     console.error("Error fetching transactions:", err);
     res.status(500).json({ message: "Error fetching transactions" });
+  }
+});
+
+app.get("/reports/accepted-orders", async (req, res) => {
+  try {
+    const { period } = req.query;
+
+    // Validate the period
+    if (!["day", "week", "month"].includes(period)) {
+      return res.status(400).send("Invalid period");
+    }
+
+    const now = new Date();
+    const startOfDec2024 = new Date(2024, 11, 1); // Example date: December 1, 2024
+
+    // Set match conditions
+    let matchCondition = {
+      createdAt: { $gte: startOfDec2024, $lt: now },
+      status: "Completed",
+    };
+
+    // Grouping logic based on period
+    let groupFormat;
+    switch (period) {
+      case "day":
+        groupFormat = "%Y-%m-%d"; // Group by day
+        break;
+      case "week":
+        groupFormat = "%Y-%U"; // Group by year and week
+        break;
+      case "month":
+        groupFormat = "%Y-%m"; // Group by year and month
+        break;
+    }
+
+    // Aggregate query
+    const acceptedOrders = await Transaction.aggregate([
+      { $match: matchCondition },
+      {
+        $group: {
+          _id: { $dateToString: { format: groupFormat, date: "$createdAt" } },
+          totalAmount: { $sum: "$totalAmount" },
+          orderCount: { $sum: 1 }, // Count number of orders
+        },
+      },
+      { $sort: { _id: 1 } },
+    ]);
+
+    res.json(acceptedOrders);
+  } catch (error) {
+    console.error("Error fetching accepted orders:", error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+//total collectionm
+app.get("/reports/total-collection", async (req, res) => {
+  try {
+    const { period } = req.query;
+
+    if (!["day", "week", "month"].includes(period)) {
+      return res.status(400).send("Invalid period");
+    }
+
+    const now = new Date();
+    const startOfDec2024 = new Date(2024, 11, 1); // December 1, 2024
+    let matchCondition = { createdAt: { $gte: startOfDec2024, $lt: now } };
+
+    // Aggregate total collection
+    const totalCollection = await Transaction.aggregate([
+      { $match: { ...matchCondition, status: "Completed" } },
+      {
+        $group: {
+          _id: null, // No grouping, sum all
+          totalAmount: { $sum: "$totalAmount" },
+        },
+      },
+    ]);
+
+    res.json(
+      totalCollection.length > 0 ? totalCollection[0] : { totalAmount: 0 }
+    );
+  } catch (error) {
+    console.error("Error fetching total collection:", error.message);
+    res.status(500).json({ error: error.message });
   }
 });
 
