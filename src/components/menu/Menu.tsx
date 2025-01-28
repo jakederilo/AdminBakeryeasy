@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import "./Menu.scss";
+import "./menu.scss";
 import { menu } from "../../data"; // Adjust the import path as necessary
 import { useAuth } from "../AuthContext"; // Adjust the import path as necessary
 
