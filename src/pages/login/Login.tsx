@@ -4,6 +4,7 @@ import axios from "axios";
 import "./login.scss";
 import { useAuth } from "../../components/AuthContext";
 import ReCAPTCHA from "react-google-recaptcha";
+const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
 
 const Login: React.FC = () => {
   const [name, setName] = useState("");
@@ -85,7 +86,7 @@ const Login: React.FC = () => {
           />
           <div className="recaptcha-container">
             <ReCAPTCHA
-              sitekey="6LcsfcUqAAAAAMHnVZ0lo7OmS7QiNdL7uc92tr0f"
+              sitekey={siteKey}
               onChange={handleCaptchaChange}
               className="justify-center items-center pb-5 pl-2"
             />
