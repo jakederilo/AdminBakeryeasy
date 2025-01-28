@@ -1,8 +1,6 @@
-import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import DataTable from "../../components/dataTable/DataTable"; // Make sure the path is correct
 import { GridColDef } from "@mui/x-data-grid";
-import AddUser from "../../components/adduser/adduser";
 import "./users.scss"; // Import the stylesheet
 
 // Define the structure of your data response for users
@@ -36,8 +34,6 @@ const columns: GridColDef[] = [
 ];
 
 const Users = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   const { data, isLoading, error } = useQuery<ApiResponse>(
     ["users"],
     async () => {
