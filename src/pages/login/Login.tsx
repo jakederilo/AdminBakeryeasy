@@ -4,7 +4,7 @@ import axios from "axios";
 import "./login.scss";
 import { useAuth } from "../../components/AuthContext";
 import ReCAPTCHA from "react-google-recaptcha";
-const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+const siteKey = import.meta.env.VITE_RECAPTCHA_NEW_SITE_KEY;
 
 const Login: React.FC = () => {
   const [name, setName] = useState("");
