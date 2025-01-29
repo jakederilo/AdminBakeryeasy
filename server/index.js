@@ -18,7 +18,6 @@ import Order from "./models/Orders.js";
 import Transaction from "./models/Transaction.js";
 import nodemailer from "nodemailer";
 import Loyalty from "./models/Loyalty.js";
-const apiUrl = import.meta.env.VITE_API_URL;
 
 // Load environment variables from .env file
 dotenv.config();
@@ -28,7 +27,7 @@ const port = 5001;
 
 app.use(
   cors({
-    origin: "http://localhost:5174", // Adjust as needed
+    origin: "https://admin-bakeryeasy-admin.vercel.app", // Adjust as needed
     credentials: true, // Allow credentials if needed
   })
 );
@@ -57,7 +56,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: `${apiUrl}/auth/google/callback`,
+      callbackURL: `http://localhost:5174/auth/google/callback`,
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -137,7 +136,7 @@ app.get(
 );
 
 // Register route (hashed password)
-app.post("/Register", async (req, res) => {
+app.post("/register", async (req, res) => {
   try {
     const { email, password } = req.body;
 
