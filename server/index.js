@@ -47,7 +47,7 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client/build", "index.html"));
 });
 
-const conectbco = process.env.MONGODB_URI;
+const conectbco = process.env.MONGO_URI;
 const jwt_secret = process.env.JWT_SECRET;
 
 connect(conectbco)
