@@ -18,6 +18,7 @@ import Order from "./models/Orders.js";
 import Transaction from "./models/Transaction.js";
 import nodemailer from "nodemailer";
 import Loyalty from "./models/Loyalty.js";
+import path from "path";
 
 // Load environment variables from .env file
 dotenv.config();
@@ -39,6 +40,12 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+app.use(express.static(path.join(__dirname, "client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build", "index.html"));
+});
 
 const conectbco = process.env.MONGODB_URI;
 const jwt_secret = process.env.JWT_SECRET;
