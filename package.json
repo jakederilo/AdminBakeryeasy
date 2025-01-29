@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "start": "node index"
+    "start": "node index.js",
+    "vercel-build": "node index.js"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
