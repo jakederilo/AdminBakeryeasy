@@ -39,44 +39,6 @@ app.use(
     saveUninitialized: true,
   })
 );
-app.use(passport.initialize());
-app.use(passport.session());
-
-// GOOGLE AUTH
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
-
-passport.deserializeUser((user, done) => {
-  done(null, user);
-});
-
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: `http://localhost:5174/auth/google/callback`,
-    },
-    async (accessToken, refreshToken, profile, done) => {
-      try {
-        let user = await Admin.findOne({ googleId: profile.id });
-        if (!user) {
-          user = await Admin.create({
-            googleId: profile.id,
-            name: profile.displayName,
-            email: profile.emails[0].value,
-            authType: "google",
-          });
-        }
-        return done(null, user);
-      } catch (err) {
-        console.error("Error during Google authentication:", err); // Log any errors
-        return done(err, null);
-      }
-    }
-  )
-);
 
 const conectbco = process.env.MONGODB_URI;
 const jwt_secret = process.env.JWT_SECRET;
@@ -88,52 +50,6 @@ connect(conectbco)
   );
 
 // Change this to a strong secret and keep it safe
-
-// Auth with Google
-app.get(
-  "/auth/google",
-  passport.authenticate("google", {
-    scope: ["profile", "email"],
-  })
-);
-
-// Callback route for Google to redirect to
-app.get(
-  "/auth/google/callback",
-  passport.authenticate("google", {
-    failureRedirect: "/login", // Redirect on failure
-  }),
-  (req, res) => {
-    try {
-      console.log("Authenticated user:", req.user);
-
-      if (req.user) {
-        // Generate a JWT token for the authenticated user
-        const token = jwt.sign({ id: req.user._id }, jwt_secret, {
-          expiresIn: "1h",
-        });
-
-        // Redirect to frontend with the token and user's name in the query string
-        res.redirect(
-          `${apiUrl}/dashboard?token=${token}&name=${req.user.name}`
-        );
-      } else {
-        // In case req.user is undefined
-        console.error("Admin not found in request");
-        res.redirect("/dashboard");
-      }
-    } catch (error) {
-      // Log the error for debugging
-      console.error("Error during Google callback:", error);
-      // Redirect to login with an error message
-      res.redirect(
-        `/Login?error=${encodeURIComponent(
-          "Authentication failed. Please try again."
-        )}`
-      );
-    }
-  }
-);
 
 // Register route (hashed password)
 app.post("/register", async (req, res) => {
