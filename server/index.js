@@ -58,11 +58,6 @@ connect(conectbco)
 
 // Change this to a strong secret and keep it safe
 
-// Add a simple test route to verify deployment
-app.get("/", (req, res) => {
-  res.send("🚀 BakeryEasy Admin API is Running!");
-});
-
 // Register route (hashed password)
 app.post("/register", async (req, res) => {
   try {
