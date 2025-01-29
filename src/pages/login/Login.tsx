@@ -5,6 +5,7 @@ import "./login.scss";
 import { useAuth } from "../../components/AuthContext";
 import ReCAPTCHA from "react-google-recaptcha";
 const siteKey = import.meta.env.VITE_RECAPTCHA_NEW_SITE_KEY;
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const Login: React.FC = () => {
   const [name, setName] = useState("");
@@ -32,7 +33,7 @@ const Login: React.FC = () => {
     }
 
     try {
-      const result = await axios.post("http://localhost:5001/login", {
+      const result = await axios.post(`${apiUrl}/login`, {
         name,
         password,
         captchaToken,

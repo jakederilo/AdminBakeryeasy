@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import DataTable from "../../components/dataTable/DataTable"; // Make sure the path is correct
 import { GridColDef } from "@mui/x-data-grid";
 import "./users.scss"; // Import the stylesheet
+const apiUrl = import.meta.env.VITE_API_URL;
 
 // Define the structure of your data response for users
 interface ApiResponse {
@@ -37,7 +38,7 @@ const Users = () => {
   const { data, isLoading, error } = useQuery<ApiResponse>(
     ["users"],
     async () => {
-      const response = await fetch("http://localhost:5001/users");
+      const response = await fetch(`${apiUrl}/users`);
       if (!response.ok) throw new Error("Error fetching users");
       return response.json();
     }

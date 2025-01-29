@@ -2,6 +2,7 @@ import "./signup.scss";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const SignUp = () => {
     e.preventDefault();
 
     try {
-      const result = await axios.post("http://localhost:5000/register", {
+      const result = await axios.post(`${apiUrl}/register`, {
         name,
         email,
         password,

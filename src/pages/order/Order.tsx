@@ -9,6 +9,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import "./order.scss";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 interface CartItem {
   title: string;
@@ -52,7 +53,7 @@ const Orders = () => {
   const { data, isLoading, error } = useQuery<ApiResponse>(
     ["orders"],
     async () => {
-      const response = await fetch("http://localhost:5001/orders");
+      const response = await fetch(`${apiUrl}/orders`);
       if (!response.ok) throw new Error("Error fetching orders");
       return response.json();
     }

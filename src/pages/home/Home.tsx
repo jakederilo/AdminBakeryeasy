@@ -1,6 +1,7 @@
 import { Line } from "react-chartjs-2";
 import { useEffect, useState } from "react";
 import PieChartBox from "../../components/pieCartBox/PieChartBox";
+const apiUrl = import.meta.env.VITE_API_URL;
 import "./home.scss";
 import {
   Chart as ChartJS,
@@ -190,10 +191,10 @@ const Home = () => {
           transactionsResponse,
           collectionsResponse,
         ] = await Promise.all([
-          fetch("http://localhost:5001/users"),
-          fetch("http://localhost:5001/items"),
-          fetch("http://localhost:5001/transactions"),
-          fetch("http://localhost:5001/reports/total-collection?period=month"),
+          fetch(`${apiUrl}/users`),
+          fetch(`${apiUrl}/items`),
+          fetch(`${apiUrl}/transactions`),
+          fetch(`${apiUrl}/reports/total-collection?period=month`),
         ]);
 
         const users = (await usersResponse.json()).data.length;
@@ -240,23 +241,23 @@ const Home = () => {
           title="Accepted Orders Per Day"
           period="day"
           color="rgba(128, 0, 128, 1)"
-          endpoint="http://localhost:5001/reports/accepted-orders"
+          endpoint={`${apiUrl}/reports/accepted-orders`}
         />
         <ChartBox
           title="Accepted Orders Per Week"
           period="week"
           color="rgba(0, 0, 255, 1)"
-          endpoint="http://localhost:5001/reports/accepted-orders"
+          endpoint={`${apiUrl}/reports/accepted-orders`}
         />
         <ChartBox
           title="Accepted Orders Per Month"
           period="month"
           color="rgba(0, 128, 0, 1)"
-          endpoint="http://localhost:5001/reports/accepted-orders"
+          endpoint={`${apiUrl}/reports/accepted-orders`}
         />
         <PieChartBox
           title="Number of Items by Category"
-          endpoint="http://localhost:5001/items-by-category"
+          endpoint={`${apiUrl}/items-by-category`}
         />
       </div>
     </div>

@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import DataTable from "../../components/dataTable/DataTable";
 import { GridColDef } from "@mui/x-data-grid";
 import "./transaction.scss";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 interface Transaction {
   _id: string;
@@ -30,7 +31,7 @@ const Transaction = () => {
   const { data, isLoading, error } = useQuery<ApiResponse>(
     ["transactions"],
     async () => {
-      const response = await fetch("http://localhost:5001/transactions");
+      const response = await fetch(`${apiUrl}/transactions`);
       if (!response.ok) throw new Error("Error fetching transactions");
       return response.json();
     }

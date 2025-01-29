@@ -18,6 +18,7 @@ import Order from "./models/Orders.js";
 import Transaction from "./models/Transaction.js";
 import nodemailer from "nodemailer";
 import Loyalty from "./models/Loyalty.js";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 // Load environment variables from .env file
 dotenv.config();
@@ -56,7 +57,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:5000/auth/google/callback",
+      callbackURL: `${apiUrl}/auth/google/callback`,
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -115,7 +116,7 @@ app.get(
 
         // Redirect to frontend with the token and user's name in the query string
         res.redirect(
-          `http://localhost:5173/dashboard?token=${token}&name=${req.user.name}`
+          `${apiUrl}/dashboard?token=${token}&name=${req.user.name}`
         );
       } else {
         // In case req.user is undefined

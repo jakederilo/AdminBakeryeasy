@@ -4,6 +4,7 @@ import DataTable from "../../components/dataTable/DataTable";
 import AddProduct from "../../components/addproduct/addproduct"; // Adjust the path as needed
 import { GridColDef } from "@mui/x-data-grid";
 import "./products.scss"; // Make sure to import the stylesheet
+const apiUrl = import.meta.env.VITE_API_URL;
 
 // Define the structure of your data response
 interface ApiResponse {
@@ -63,7 +64,7 @@ const Products = () => {
   const { data, isLoading, error } = useQuery<ApiResponse>(
     ["items"],
     async () => {
-      const response = await fetch("http://localhost:5001/items");
+      const response = await fetch(`${apiUrl}/items`);
       if (!response.ok) throw new Error("Error fetching items");
       return response.json();
     }

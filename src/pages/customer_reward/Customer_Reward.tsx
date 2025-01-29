@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import DataTable from "../../components/dataTable/DataTable";
 import { GridColDef } from "@mui/x-data-grid";
 import "./customer_reward.scss";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 interface Loyalty {
   _id: string;
@@ -44,7 +45,7 @@ const Customer_Reward = () => {
   const { data, isLoading, error } = useQuery<ApiResponse>(
     ["rewards"],
     async () => {
-      const response = await fetch("http://localhost:5001/rewards");
+      const response = await fetch(`${apiUrl}/rewards`);
       if (!response.ok) throw new Error("Error fetching rewards");
       return response.json();
     }
