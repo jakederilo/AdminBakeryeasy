@@ -1,4 +1,127 @@
-@import "../../styles/variables.scss";
+@use "../../styles/variables" as vars;
+@use "../../styles/responsive" as resp;
+
+.dashboard {
+  padding: 2rem;
+  background-color: vars.$main-bg; // Use namespaced variable for main background color
+  font-family: Arial, sans-serif;
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: vars.$main-color; // Use namespaced variable for main text color
+    text-align: center;
+  }
+
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+
+    .kpi-box {
+      background-color: vars.$soft-bg; // Use namespaced variable for soft background color
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: vars.$soft-color; // Use namespaced variable for soft text color
+      }
+
+      .value {
+        font-size: 2rem;
+        font-weight: bold;
+        color: vars.$main-color; // Use namespaced variable for main text color
+      }
+
+      .change {
+        font-size: 1rem;
+        color: vars.$soft-color; // Use namespaced variable for soft text color
+        margin-top: 0.5rem;
+      }
+    }
+  }
+
+  .chart-grid {
+    display: grid;
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); // Adjusted to fit charts in two columns
+    gap: 2rem;
+
+    .chart-box {
+      background: vars.$soft-bg; // Use namespaced variable for soft background color
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      h2 {
+        margin-bottom: 1rem;
+        font-size: 1.4rem;
+        color: vars.$main-color; // Use namespaced variable for main text color
+      }
+
+      .chart-stats {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        font-weight: bold;
+
+        .total-amount {
+          color: purple;
+          font-size: 1rem;
+        }
+
+        .order-count {
+          color: orange;
+          font-size: 1rem;
+        }
+      }
+
+      canvas {
+        width: 100% !important; // Ensures the chart resizes properly
+        max-height: 300px; // Limits the chart height
+      }
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .kpi-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .chart-grid {
+      grid-template-columns: 1fr; // Adjusts to one column for smaller screens
+    }
+  }
+
+  @media (max-width: 768px) {
+    .kpi-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .chart-box canvas {
+      max-height: 250px; // Further reduce chart size for small screens
+    }
+  }
+}
 
 .modal-overlay {
   display: flex;
@@ -14,13 +137,13 @@
   .modal {
     padding: 50px;
     border-radius: 10px;
-    background-color: $main-bg; // Main background color
+    background-color: vars.$main-bg; // Use namespaced variable for main background color
     position: relative;
 
     h1 {
       margin-bottom: 40px;
       font-size: 24px;
-      color: $soft-color; // Soft color for text
+      color: vars.$soft-color; // Use namespaced variable for soft text color
     }
 
     .close {
@@ -53,7 +176,7 @@
           background-color: transparent;
           color: white; // Text color
           outline: none;
-          border: 1px solid $soft-color; // Border color
+          border: 1px solid vars.$soft-color; // Use namespaced variable for border color
           border-radius: 3px;
         }
       }
@@ -61,7 +184,7 @@
         width: 100%;
         padding: 10px;
         cursor: pointer;
-        background-color: $soft-color; // Button background color
+        background-color: vars.$soft-color; // Use namespaced variable for button background color
         color: white; // Button text color
         border: none; // Remove default border
         border-radius: 5px; // Button border radius

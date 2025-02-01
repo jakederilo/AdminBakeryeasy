@@ -1,5 +1,5 @@
-@import "./variables.scss";
-@import "./responsive.scss";
+@use "./variables" as vars;
+@use "./responsive" as resp;
 
 * {
   margin: 0;
@@ -14,36 +14,36 @@ a {
 
 .main {
   font-family: "Inter", sans-serif;
-  background-color: $main-bg;
-  color: $main-color;
-  width: 100%; // Ensures it spans the full width
-  height: 100vh; // Occupies full viewport height
-  display: flex; // Makes it flexible for alignment
-  flex-direction: column; // Optional for vertical stacking if needed
+  background-color: vars.$main-bg;
+  color: vars.$main-color;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
-  display: flex; // Side-by-side layout
-  flex: 1; // Ensures the container stretches to occupy remaining space
-  overflow: auto; // Adds scrolling if content overflows
-  color: $main-color;
+  display: flex;
+  flex: 1;
+  overflow: auto;
+  color: vars.$main-color;
 }
 
 .menuContainer {
-  width: 250px; // Fixed width for the menu
+  width: 250px;
   padding: 5px 20px;
-  border-right: 2px solid $soft-bg;
+  border-right: 2px solid vars.$soft-bg;
 
-  @include lg {
-    width: max-content; // Adjust width for larger screens
+  @include resp.lg {
+    width: max-content;
   }
 }
 
 .contentContainer {
-  flex: 1; // Takes up the remaining space
-  padding: 20px; // Adjust padding for better readability
-  min-width: 0; // Prevents content from overflowing
-  overflow-x: auto; // Horizontal scrolling for wide content
-  overflow-y: auto; // Vertical scrolling
-  background-color: $main-bg; // Optional background color for better contrast
+  flex: 1;
+  padding: 20px;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: auto;
+  background-color: vars.$main-bg;
 }

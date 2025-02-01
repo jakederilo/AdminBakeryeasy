@@ -28,7 +28,7 @@ const port = 5001;
 
 app.use(
   cors({
-    origin: "https://admin-bakeryeasy-admin.vercel.app", // Adjust as needed
+    origin: "http://localhost:5174", // Adjust as needed
     credentials: true, // Allow credentials if needed
   })
 );
@@ -40,12 +40,6 @@ app.use(
     saveUninitialized: true,
   })
 );
-
-app.use(express.static(path.join(__dirname, "client/build")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/build", "index.html"));
-});
 
 const conectbco = process.env.MONGO_URI;
 const jwt_secret = process.env.JWT_SECRET;

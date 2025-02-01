@@ -1,5 +1,6 @@
-@import "../../styles/variables.scss";
-@import "../../styles/responsive.scss";
+@use "../../styles/variables" as vars;
+@use "../../styles/responsive" as resp; // ✅ Correct namespace for mixins
+@use "sass:color";
 
 .menu {
   .item {
@@ -11,10 +12,11 @@
     .title {
       font-size: 12px;
       font-weight: 200;
-      color: $soft-color;
+      color: vars.$soft-color; // ✅ Correct namespaced variable
       text-transform: uppercase;
 
-      @include lg{
+      @include resp.lg {
+        // ✅ Correct namespaced mixin
         display: none;
       }
     }
@@ -27,11 +29,12 @@
       border-radius: 5px;
 
       &:hover {
-        background-color: $soft-bg;
+        background-color: vars.$soft-bg; // ✅ Correct namespaced variable
       }
 
-      .listItemTitle{
-        @include lg{
+      .listItemTitle {
+        @include resp.lg {
+          // ✅ Fixed missing namespace for mixin
           display: none;
         }
       }

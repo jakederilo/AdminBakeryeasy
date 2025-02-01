@@ -1,15 +1,15 @@
-@import "../../styles/variables.scss";
-@import "../../styles/responsive.scss";
+@use "../../styles/variables" as vars;
+@use "../../styles/responsive" as resp;
 
 .dashboard {
   padding: 2rem;
-  background-color: $main-bg; // Main background color
+  background-color: vars.$main-bg; // Use namespaced variable for main background color
   font-family: Arial, sans-serif;
 
   h1 {
     font-size: 2.5rem;
     margin-bottom: 2rem;
-    color: $main-color; // Main text color
+    color: vars.$main-color; // Use namespaced variable for main text color
     text-align: center;
   }
 
@@ -20,7 +20,7 @@
     margin-bottom: 2rem;
 
     .kpi-box {
-      background-color: $soft-bg; // Use the soft background color
+      background-color: vars.$soft-bg; // Use namespaced variable for soft background color
       padding: 1.5rem;
       border-radius: 12px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -35,18 +35,18 @@
       h3 {
         font-size: 1.2rem;
         margin-bottom: 0.5rem;
-        color: $soft-color; // Soft text color
+        color: vars.$soft-color; // Use namespaced variable for soft text color
       }
 
       .value {
         font-size: 2rem;
         font-weight: bold;
-        color: $main-color; // Main text color
+        color: vars.$main-color; // Use namespaced variable for main text color
       }
 
       .change {
         font-size: 1rem;
-        color: $soft-color; // Soft text color
+        color: vars.$soft-color; // Use namespaced variable for soft text color
         margin-top: 0.5rem;
       }
     }
@@ -61,7 +61,7 @@
     gap: 2rem;
 
     .chart-box {
-      background: $soft-bg; // Soft background color for charts
+      background: vars.$soft-bg; // Use namespaced variable for soft background color
       padding: 1.5rem;
       border-radius: 12px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -75,7 +75,7 @@
       h2 {
         margin-bottom: 1rem;
         font-size: 1.4rem;
-        color: $main-color; // Main text color
+        color: vars.$main-color; // Use namespaced variable for main text color
       }
 
       .chart-stats {

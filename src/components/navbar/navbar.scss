@@ -1,4 +1,4 @@
-@import "../../styles/responsive.scss";
+@use "../../styles/responsive.scss" as resp;
 
 .navbar {
   width: 100%;
@@ -13,13 +13,14 @@
     font-weight: bold;
     gap: 10px;
   }
+
   .icons {
     display: flex;
     align-items: center;
     gap: 20px;
 
-    .icon{
-      @include sm{
+    .icon {
+      @include resp.sm {
         display: none;
       }
     }

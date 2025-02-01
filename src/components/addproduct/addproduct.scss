@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@use "../../styles/variables" as vars;
 
 .modal-overlay {
   display: flex;
@@ -14,13 +14,13 @@
   .modal {
     padding: 50px;
     border-radius: 10px;
-    background-color: $main-bg;
+    background-color: vars.$main-bg; // Use namespaced variable for background
     position: relative;
 
     h1 {
       margin-bottom: 40px;
       font-size: 24px;
-      color: $soft-color;
+      color: vars.$soft-color; // Use namespaced variable for soft color
     }
 
     .close {
@@ -46,7 +46,7 @@
 
         label {
           font-size: 14px;
-          color: $soft-color; // Label text color
+          color: vars.$soft-color; // Use namespaced variable for label text color
         }
 
         input,
@@ -56,14 +56,13 @@
           background-color: transparent;
           color: white;
           outline: none;
-          border: 1px solid $soft-color;
+          border: 1px solid vars.$soft-color; // Use namespaced variable for border color
           border-radius: 3px;
           appearance: none; // Remove default arrow icon in some browsers
         }
 
         // Optional custom arrow icon for the select dropdown
         select {
-          background-image: url("path/to/your-custom-arrow-icon.svg"); // Add an SVG icon if desired
           background-repeat: no-repeat;
           background-position: right 10px center; // Positioning for custom icon
           background-size: 12px;
@@ -71,7 +70,7 @@
         }
 
         option {
-          background-color: $main-bg; // Background color for dropdown options
+          background-color: vars.$main-bg; // Use namespaced variable for dropdown background
           color: white; // Text color for dropdown options
         }
       }
@@ -80,7 +79,7 @@
         width: 100%;
         padding: 10px;
         cursor: pointer;
-        background-color: $soft-color; // Button background color
+        background-color: vars.$soft-color; // Use namespaced variable for button background color
         color: darkblue; // Button text color
         border: none; // Remove default border
         border-radius: 5px; // Button border radius
