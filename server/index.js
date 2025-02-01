@@ -41,6 +41,19 @@ app.use(
   })
 );
 
+// Serve static files from the Vite app
+app.use(express.static(path.join(__dirname, "../src/dist")));
+
+// API route example
+app.get("/api", (req, res) => {
+  res.json({ message: "Hello from the backend!" });
+});
+
+// Serve the Vite app for all other routes
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../src/dist/index.html"));
+});
+
 const conectbco = process.env.MONGO_URI;
 const jwt_secret = process.env.JWT_SECRET;
 
