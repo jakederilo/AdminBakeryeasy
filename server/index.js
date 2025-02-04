@@ -28,7 +28,7 @@ const port = process.env.PORT || 8080;
 
 app.use(
   cors({
-    origin: "https://admin-bakeryeasy-admin.vercel.app", // Adjust as needed
+    origin: "https://adminbakeryeasy.onrender.com", // Adjust as needed
     credentials: true, // Allow credentials if needed
   })
 );
