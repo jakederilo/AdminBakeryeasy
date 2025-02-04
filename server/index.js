@@ -41,15 +41,13 @@ app.use(
   })
 );
 
-// Serve frontend build files
-const __dirname = path.resolve(); // Get the root directory
-app.use(express.static(path.join(__dirname, "src", "dist"))); // Adjust if needed
+// Serve frontend files from project root
+const buildPath = path.join(__dirname, ".."); // Adjust to match index.html location
+app.use(express.static(buildPath));
 
-// Catch-all route to serve React app
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "src", "dist", "index.html"));
+  res.sendFile(path.join(buildPath, "index.html"));
 });
-
 const conectbco = process.env.MONGO_URI;
 const jwt_secret = process.env.JWT_SECRET;
 
