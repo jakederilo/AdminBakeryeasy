@@ -19,6 +19,8 @@ import Transaction from "../server/models/Transaction.js";
 import nodemailer from "nodemailer";
 import Loyalty from "../server/models/Loyalty.js";
 import path from "path";
+import express, { Express } from "express";
+import { fileURLToPath } from "url";
 
 // Load environment variables from .env file
 dotenv.config();
@@ -41,8 +43,8 @@ app.use(
   })
 );
 
-// Serve frontend files from project root
-const buildPath = path.join(__dirname, "../dist"); // Correctly point to 'dist'
+const buildPath = path.join(__dirname, "..", "dist");
+
 app.use(express.static(buildPath));
 
 app.get("*", (req, res) => {
