@@ -1,5 +1,5 @@
 //AdminDashboard
-import express, { json } from "express";
+
 import { connect } from "mongoose";
 import cors from "cors";
 import Admin from "../server/models/Admin.js";
@@ -21,7 +21,8 @@ import Loyalty from "../server/models/Loyalty.js";
 import path from "path";
 import express, { Express } from "express";
 import { fileURLToPath } from "url";
-
+const express = require("express");
+const { json } = express;
 // Load environment variables from .env file
 dotenv.config();
 
@@ -42,6 +43,9 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const buildPath = path.join(__dirname, "..", "dist");
 
