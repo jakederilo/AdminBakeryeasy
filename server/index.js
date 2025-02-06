@@ -2,22 +2,22 @@
 
 import { connect } from "mongoose";
 import cors from "cors";
-import Admin from "../server/models/Admin.js";
+import Admin from "./models/Admin.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import session from "express-session";
 import passport from "passport";
 import GoogleStrategy from "passport-google-oauth20";
 import dotenv from "dotenv"; // Import dotenv
-import Item from "../server/models/Item.js";
+import Item from "./models/Item.js";
 import multer from "multer";
-import User from "../server/models/User.js";
+import User from "./models/User.js";
 import mongoose from "mongoose";
 import axios from "axios";
-import Order from "../server/models/Orders.js";
-import Transaction from "../server/models/Transaction.js";
+import Order from "./models/Orders.js";
+import Transaction from "./models/Transaction.js";
 import nodemailer from "nodemailer";
-import Loyalty from "../server/models/Loyalty.js";
+import Loyalty from "./models/Loyalty.js";
 import path from "path";
 import express, { Express } from "express";
 import { fileURLToPath } from "url";
