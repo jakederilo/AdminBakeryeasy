@@ -44,14 +44,16 @@ app.use(
   })
 );
 
-// Serve static files from React app
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const buildPath = path.join(__dirname, "..", "dist");
-app.use(express.static(buildPath));
+// Define the path to the dist folder
+const __dirname = path.resolve();
+const distPath = path.join(__dirname, "dist");
 
+// Serve static files
+app.use(express.static(distPath));
+
+// Handle all other routes by sending the index.html
 app.get("*", (req, res) => {
-  res.sendFile(path.join(buildPath, "index.html"));
+  res.sendFile(path.join(distPath, "index.html"));
 });
 
 const { connect } = require("mongoose");
