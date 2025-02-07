@@ -44,11 +44,10 @@ app.use(
   })
 );
 
+// Serve static files from React app
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 const buildPath = path.join(__dirname, "..", "dist");
-
 app.use(express.static(buildPath));
 
 app.get("*", (req, res) => {
