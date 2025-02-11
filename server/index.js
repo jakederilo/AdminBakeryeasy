@@ -6,23 +6,17 @@ import Admin from "./models/Admin.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import session from "express-session";
-import passport from "passport";
-import GoogleStrategy from "passport-google-oauth20";
 import dotenv from "dotenv"; // Import dotenv
 import Item from "./models/Item.js";
 import multer from "multer";
 import User from "./models/User.js";
-import mongoose from "mongoose";
 import axios from "axios";
 import Order from "./models/Orders.js";
 import Transaction from "./models/Transaction.js";
 import nodemailer from "nodemailer";
 import Loyalty from "./models/Loyalty.js";
-import path from "path";
-import express, { Express } from "express";
-import { fileURLToPath } from "url";
-const express = require("express");
-const { json } = express;
+import express from "express";
+
 // Load environment variables from .env file
 dotenv.config();
 
@@ -31,11 +25,12 @@ const port = process.env.PORT || 8080;
 
 app.use(
   cors({
-    origin: "https://admin-bakeryeasy-admin.vercel.app", // Adjust as needed
+    origin: "https://bakeryeasy-admin-backend.vercel.app", // Adjust as needed
     credentials: true, // Allow credentials if needed
   })
 );
-app.use(json());
+app.use(express.json());
+
 app.use(
   session({
     secret: "sdssf",
@@ -44,19 +39,10 @@ app.use(
   })
 );
 
-// Define the path to the dist folder
-const __dirname = path.resolve();
-const distPath = path.join(__dirname, "dist");
-
-// Serve static files
-app.use(express.static(distPath));
-
-// Handle all other routes by sending the index.html
-app.get("*", (req, res) => {
-  res.sendFile(path.join(distPath, "index.html"));
+// Define your routes here
+app.get("/", (req, res) => {
+  res.send("Hello, world!");
 });
-
-const { connect } = require("mongoose");
 
 const conectbco = process.env.MONGO_URI;
 const jwt_secret = process.env.JWT_SECRET;
@@ -67,7 +53,10 @@ connect(conectbco)
     console.log(`Error in connection with DataBase MongoDB ${err}`)
   );
 
-// Change this to a strong secret and keep it safe
+// Define your routes here
+app.get("/", (req, res) => {
+  res.send("Hello, world!");
+});
 
 // Register route (hashed password)
 app.post("/register", async (req, res) => {
